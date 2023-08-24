@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Box from "./components/Box";
 function App() {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  const increase = () => {
+    dispatch({ type: "INCREMENT" });
+  };
+  const decrease = () => {
+    dispatch({ type: "DECREMENT", payload: { num: 5 } });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={increase}>증가버튼</button>
+      <button onClick={decrease}>감소버튼</button>
+      <div>
+        현재 클릭 수 : <h1>{count}</h1>
+      </div>
+
+      <Box />
     </div>
   );
 }
